@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface CarFleetAPIService {
 
-    @GET("/rest/person-list")
+    @GET("/rest/car-list")
     suspend fun getCars(
         @Query("apikey")
         apiKey: String = BuildConfig.API_KEY

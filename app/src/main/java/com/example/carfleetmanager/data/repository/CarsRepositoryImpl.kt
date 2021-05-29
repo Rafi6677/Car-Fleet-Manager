@@ -2,7 +2,6 @@ package com.example.carfleetmanager.data.repository
 
 import android.util.Log
 import com.example.carfleetmanager.data.model.Car
-import com.example.carfleetmanager.data.model.CarList
 import com.example.carfleetmanager.data.repository.datasource.CarsRemoteDataSource
 import com.example.carfleetmanager.domain.repository.CarsRepository
 import java.lang.Exception
