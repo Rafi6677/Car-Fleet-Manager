@@ -4,11 +4,15 @@
     <string name="car_list">Car list</string>
     <string name="map">Map</string>
 
+    <string name="registration_number">Registration number: </string>
     <string name="registration_number_example">LU 12345</string>
+    <string name="brand">Brand: </string>
     <string name="brand_example">Volkswagen</string>
+    <string name="model">Model: </string>
     <string name="model_example">Golf</string>
     <string name="color_example">Color: grey</string>
 
     <string name="no_car_data_found">No car data found.</string>
+    <string name="car_color">Car color</string>
     <string name="add_new_car">Add new car</string>
 </resources>

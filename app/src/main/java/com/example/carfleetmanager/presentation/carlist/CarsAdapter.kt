@@ -1,7 +1,10 @@
 package com.example.carfleetmanager.presentation.carlist
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +58,13 @@ class CarsAdapter : RecyclerView.Adapter<CarsAdapter.CarsViewHolder>() {
             binding.registrationNumberTextView.text = car.registration
             binding.brandTextView.text = car.brand
             binding.modelTextView.text = car.model
-            binding.colorTextView.text = car.color
+
+            ImageViewCompat.setImageTintList(
+                    binding.colorImageView,
+                    ColorStateList.valueOf(
+                            Color.parseColor(car.color)
+                    )
+            )
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let {

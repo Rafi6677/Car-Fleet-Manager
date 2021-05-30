@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/backgroundLightGrey">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/car_cardView"
@@ -11,52 +13,100 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/lightCream"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_10sdp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/_10sdp">
 
-            <TextView
-                android:id="@+id/registration_number_textView"
+            <ImageView
+                android:id="@+id/registration_plate_imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/car_color"
+                android:src="@drawable/ic_registration_plate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/registration_number_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/registration_number_example"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_22ssp"
                 android:textAllCaps="true"
-                android:layout_marginBottom="@dimen/_5sdp"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/_30ssp"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="@+id/registration_plate_imageView"
+                app:layout_constraintStart_toEndOf="@+id/brand_info_textView"
+                app:layout_constraintTop_toTopOf="@+id/registration_plate_imageView" />
+
+            <TextView
+                android:id="@+id/brand_info_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/brand"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registration_plate_imageView" />
 
             <TextView
                 android:id="@+id/brand_textView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/brand_example"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_18ssp"/>
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/brand_info_textView"
+                app:layout_constraintStart_toEndOf="@+id/model_info_textView"
+                app:layout_constraintTop_toTopOf="@+id/brand_info_textView" />
+
+            <TextView
+                android:id="@+id/model_info_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/model"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/brand_info_textView" />
 
             <TextView
                 android:id="@+id/model_textView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/model_example"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18ssp"
-                android:layout_marginBottom="@dimen/_5sdp"/>
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/model_info_textView"
+                app:layout_constraintStart_toEndOf="@+id/model_info_textView"
+                app:layout_constraintTop_toTopOf="@+id/model_info_textView" />
 
-            <TextView
-                android:id="@+id/color_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/color_example"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"/>
+            <ImageView
+                android:id="@+id/color_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50sdp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_car"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/model_info_textView"
+                android:contentDescription="@string/car_color" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
