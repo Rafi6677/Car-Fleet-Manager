@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,19 +7,24 @@
     android:background="@color/backgroundLightGrey"
     tools:context=".presentation.carlist.CarListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/car_list_recyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/car_list_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="12dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/no_car_data_found_textView"

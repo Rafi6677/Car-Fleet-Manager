@@ -13,6 +13,7 @@ import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.data.model.CarList
 import com.example.carfleetmanager.data.util.Resource
 import com.example.carfleetmanager.domain.usecase.GetCarsUseCase
+import com.example.carfleetmanager.domain.usecase.UpdateCarsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CarListViewModel @Inject constructor(
     private val app: Application,
-    private val getCarsUseCase: GetCarsUseCase
+    private val getCarsUseCase: GetCarsUseCase,
+    private val updateCarsUseCase: UpdateCarsUseCase
 ) : AndroidViewModel(app) {
 
     private fun isNetworkAvailable(context: Context?): Boolean {
@@ -61,6 +63,10 @@ class CarListViewModel @Inject constructor(
 
     fun getCarList() = viewModelScope.launch(Dispatchers.IO) {
         carList.postValue(getCarsUseCase.execute())
+    }
+
+    fun updateCarList() = viewModelScope.launch(Dispatchers.IO) {
+        carList.postValue(updateCarsUseCase.execute())
     }
 
 }

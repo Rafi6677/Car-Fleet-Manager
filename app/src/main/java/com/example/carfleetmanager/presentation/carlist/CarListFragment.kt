@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.carfleetmanager.R
+import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarListBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,7 @@ class CarListFragment : Fragment() {
 
         initRecyclerView()
         displayCarList()
+        initSwipeContainer()
     }
 
     private fun initRecyclerView() {
@@ -60,6 +63,21 @@ class CarListFragment : Fragment() {
                         .show()
             }
         })
+    }
+
+    private fun initSwipeContainer() {
+        binding.swipeRefreshContainer.let {
+            it.setOnRefreshListener {
+                updateCarList()
+                it.isRefreshing = false
+            }
+        }
+    }
+
+    private fun updateCarList() {
+        carsAdapter.differ.submitList(emptyList())
+        showProgressBar()
+        viewModel.updateCarList()
     }
 
     private fun showProgressBar() {
