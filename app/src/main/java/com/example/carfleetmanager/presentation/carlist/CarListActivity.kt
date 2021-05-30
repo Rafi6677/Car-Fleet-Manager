@@ -1,5 +1,6 @@
 package com.example.carfleetmanager.presentation.carlist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.ActivityCarListBinding
+import com.example.carfleetmanager.presentation.addnewcar.AddNewCarActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +26,7 @@ class CarListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViewPager()
+        initButtons()
     }
 
     private fun initViewPager() {
@@ -52,6 +55,13 @@ class CarListActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun initButtons() {
+        binding.addNewCarButton.setOnClickListener {
+            val intent = Intent(this, AddNewCarActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

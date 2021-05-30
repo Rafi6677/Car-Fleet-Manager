@@ -10,9 +10,22 @@
     <string name="brand_example">Volkswagen</string>
     <string name="model">Model: </string>
     <string name="model_example">Golf</string>
-    <string name="color_example">Color: grey</string>
+    <string name="year">Year: </string>
+    <string name="color">Color: </string>
+    <string name="color_example">grey</string>
+    <string name="production_date">Production\ndate: </string>
+    <string name="production_date_example">__ / __ / ____</string>
+    <string name="coordinates">Coordinates: </string>
+    <string name="latitude">Latitude: </string>
+    <string name="latitude_example">50.754</string>
+    <string name="longitude">Longitude: </string>
+    <string name="longitude_example">12.2145</string>
+    <string name="owner">Owner: </string>
+    <string name="owner_example">Jan Kowalski</string>
 
     <string name="no_car_data_found">No car data found.</string>
+    <string name="back">Back</string>
     <string name="car_color">Car color</string>
     <string name="add_new_car">Add new car</string>
+    <string name="save">Save</string>
 </resources>

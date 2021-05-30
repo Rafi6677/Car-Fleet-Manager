@@ -12,6 +12,12 @@ data class Car(
     val id: String,
     @SerializedName("brand")
     val brand: String,
+    @SerializedName("model")
+    val model: String,
+    @SerializedName("registration")
+    val registration: String,
+    @SerializedName("year")
+    val year: String,
     @SerializedName("color")
     val color: String,
     @SerializedName("lat")
@@ -20,16 +26,10 @@ data class Car(
     val lng: String,
     @SerializedName("_mock")
     val mock: Boolean,
-    @SerializedName("model")
-    val model: String,
     @SerializedName("ownerId")
     val ownerId: String,
     @SerializedName("_recent")
     val recent: Boolean,
     @SerializedName("_recent_changed")
-    val recentChanged: Boolean,
-    @SerializedName("registration")
-    val registration: String,
-    @SerializedName("year")
-    val year: String
+    val recentChanged: Boolean
 )

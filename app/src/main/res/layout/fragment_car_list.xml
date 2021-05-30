@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="12dp" />
+            android:layout_marginEnd="@dimen/_10sdp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
