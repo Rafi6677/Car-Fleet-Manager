@@ -5,5 +5,6 @@ import com.example.carfleetmanager.data.model.Car
 interface CarsRepository {
 
     suspend fun getCars(): List<Car>?
+    suspend fun updateCars(): List<Car>?
 
 }

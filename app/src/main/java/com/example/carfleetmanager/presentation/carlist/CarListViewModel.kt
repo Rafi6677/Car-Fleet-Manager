@@ -60,16 +60,7 @@ class CarListViewModel @Inject constructor(
     val carList: MutableLiveData<List<Car>> = MutableLiveData()
 
     fun getCarList() = viewModelScope.launch(Dispatchers.IO) {
-        try {
-            if (isNetworkAvailable(app)) {
-                val apiResult = getCarsUseCase.execute()
-                carList.postValue(apiResult)
-            } else {
-                //no internet connection
-            }
-        } catch (e: Exception) {
-
-        }
+        carList.postValue(getCarsUseCase.execute())
     }
 
 }

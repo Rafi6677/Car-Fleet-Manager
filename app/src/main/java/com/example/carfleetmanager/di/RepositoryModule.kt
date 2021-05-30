@@ -1,6 +1,8 @@
 package com.example.carfleetmanager.di
 
 import com.example.carfleetmanager.data.repository.CarsRepositoryImpl
+import com.example.carfleetmanager.data.repository.datasource.CarsCacheDataSource
+import com.example.carfleetmanager.data.repository.datasource.CarsLocalDataSource
 import com.example.carfleetmanager.data.repository.datasource.CarsRemoteDataSource
 import com.example.carfleetmanager.domain.repository.CarsRepository
 import dagger.Module
@@ -16,9 +18,15 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideCarsRepository(
-        carsRemoteDataSource: CarsRemoteDataSource
+        carsRemoteDataSource: CarsRemoteDataSource,
+        carsLocalDataSource: CarsLocalDataSource,
+        carsCacheDataSource: CarsCacheDataSource
     ): CarsRepository {
-        return CarsRepositoryImpl(carsRemoteDataSource)
+        return CarsRepositoryImpl(
+            carsRemoteDataSource,
+            carsLocalDataSource,
+            carsCacheDataSource
+        )
     }
 
 }

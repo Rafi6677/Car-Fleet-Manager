@@ -1,15 +1,19 @@
 package com.example.carfleetmanager.data.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "cars")
 data class Car(
+    @PrimaryKey
+    @SerializedName("_id")
+    val id: String,
     @SerializedName("brand")
     val brand: String,
     @SerializedName("color")
     val color: String,
-    @SerializedName("_id")
-    val id: String,
     @SerializedName("lat")
     val lat: String,
     @SerializedName("lng")
