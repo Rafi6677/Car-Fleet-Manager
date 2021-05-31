@@ -1,10 +1,10 @@
-package com.example.carfleetmanager.di
+package com.example.carfleetmanager.di.db
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import com.example.carfleetmanager.data.db.CarFleetDatabase
 import com.example.carfleetmanager.data.db.dao.CarsDAO
+import com.example.carfleetmanager.data.db.dao.OwnersDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +29,12 @@ class DatabaseModule {
     @Provides
     fun provideCarsDAO(carFleetDatabase: CarFleetDatabase): CarsDAO {
         return carFleetDatabase.getCarsDAO()
+    }
+
+    @Singleton
+    @Provides
+    fun provideOwnersDAO(carFleetDatabase: CarFleetDatabase): OwnersDAO {
+        return carFleetDatabase.getOwnersDAO()
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.carfleetmanager.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.carfleetmanager.data.db.dao.CarsDAO
+import com.example.carfleetmanager.data.db.dao.OwnersDAO
 import com.example.carfleetmanager.data.model.Car
 
 @Database(
@@ -13,5 +14,6 @@ import com.example.carfleetmanager.data.model.Car
 abstract class CarFleetDatabase : RoomDatabase() {
 
     abstract fun getCarsDAO(): CarsDAO
+    abstract fun getOwnersDAO(): OwnersDAO
 
 }

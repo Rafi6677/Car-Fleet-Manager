@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.di
+package com.example.carfleetmanager.di.net
 
 import com.example.carfleetmanager.BuildConfig
 import com.example.carfleetmanager.data.api.CarFleetAPIService

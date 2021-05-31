@@ -1,7 +1,7 @@
-package com.example.carfleetmanager.data.repository.datasourceimpl
+package com.example.carfleetmanager.data.repository.cars.datasourceimpl
 
 import com.example.carfleetmanager.data.model.Car
-import com.example.carfleetmanager.data.repository.datasource.CarsCacheDataSource
+import com.example.carfleetmanager.data.repository.cars.datasource.CarsCacheDataSource
 
 class CarsCacheDataSourceImpl : CarsCacheDataSource {
 
@@ -13,7 +13,7 @@ class CarsCacheDataSourceImpl : CarsCacheDataSource {
 
     override suspend fun saveCarsToCache(cars: List<Car>) {
         carList.clear()
-        carList = ArrayList(cars)
+        carList.addAll(cars)
     }
 
 }

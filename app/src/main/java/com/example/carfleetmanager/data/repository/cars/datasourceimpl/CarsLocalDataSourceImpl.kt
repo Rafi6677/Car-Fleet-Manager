@@ -1,8 +1,8 @@
-package com.example.carfleetmanager.data.repository.datasourceimpl
+package com.example.carfleetmanager.data.repository.cars.datasourceimpl
 
 import com.example.carfleetmanager.data.db.dao.CarsDAO
 import com.example.carfleetmanager.data.model.Car
-import com.example.carfleetmanager.data.repository.datasource.CarsLocalDataSource
+import com.example.carfleetmanager.data.repository.cars.datasource.CarsLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

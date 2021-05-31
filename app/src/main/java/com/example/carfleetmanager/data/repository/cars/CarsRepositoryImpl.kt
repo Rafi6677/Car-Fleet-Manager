@@ -1,17 +1,17 @@
-package com.example.carfleetmanager.data.repository
+package com.example.carfleetmanager.data.repository.cars
 
 import android.util.Log
 import com.example.carfleetmanager.data.model.Car
-import com.example.carfleetmanager.data.repository.datasource.CarsCacheDataSource
-import com.example.carfleetmanager.data.repository.datasource.CarsLocalDataSource
-import com.example.carfleetmanager.data.repository.datasource.CarsRemoteDataSource
+import com.example.carfleetmanager.data.repository.cars.datasource.CarsCacheDataSource
+import com.example.carfleetmanager.data.repository.cars.datasource.CarsLocalDataSource
+import com.example.carfleetmanager.data.repository.cars.datasource.CarsRemoteDataSource
 import com.example.carfleetmanager.domain.repository.CarsRepository
 import java.lang.Exception
 
 class CarsRepositoryImpl(
-    private val carsRemoteDataSource: CarsRemoteDataSource,
-    private val carsLocalDataSource: CarsLocalDataSource,
-    private val carsCacheDataSource: CarsCacheDataSource
+        private val carsRemoteDataSource: CarsRemoteDataSource,
+        private val carsLocalDataSource: CarsLocalDataSource,
+        private val carsCacheDataSource: CarsCacheDataSource
 ) : CarsRepository {
 
     override suspend fun getCars(): List<Car>? {
