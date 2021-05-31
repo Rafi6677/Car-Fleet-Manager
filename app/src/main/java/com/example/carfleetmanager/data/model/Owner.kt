@@ -1,11 +1,12 @@
 package com.example.carfleetmanager.data.model
 
-
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "owners")
 data class Owner(
+    @PrimaryKey
     @SerializedName("_id")
     val id: String,
     @SerializedName("first_name")

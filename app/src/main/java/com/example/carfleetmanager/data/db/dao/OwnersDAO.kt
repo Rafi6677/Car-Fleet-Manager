@@ -1,11 +1,13 @@
 package com.example.carfleetmanager.data.db.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.carfleetmanager.data.model.Owner
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface OwnersDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

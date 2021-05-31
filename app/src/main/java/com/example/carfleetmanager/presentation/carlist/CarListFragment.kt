@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.carfleetmanager.R
-import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarListBinding
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 class CarListFragment : Fragment() {
 
@@ -50,6 +46,7 @@ class CarListFragment : Fragment() {
         hideNoDataFoundInfo()
         showProgressBar()
 
+        viewModel.getOwnerList()
         viewModel.getCarList()
         viewModel.carList.observe(viewLifecycleOwner, { response ->
             if (response != null) {
@@ -68,15 +65,16 @@ class CarListFragment : Fragment() {
     private fun initSwipeContainer() {
         binding.swipeRefreshContainer.let {
             it.setOnRefreshListener {
-                updateCarList()
+                updateData()
                 it.isRefreshing = false
             }
         }
     }
 
-    private fun updateCarList() {
+    private fun updateData() {
         carsAdapter.differ.submitList(emptyList())
         showProgressBar()
+        viewModel.updateOwnerList()
         viewModel.updateCarList()
     }
 

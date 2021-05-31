@@ -4,6 +4,6 @@ import com.example.carfleetmanager.domain.repository.OwnersRepository
 
 class GetOwnerById(private val ownersRepository: OwnersRepository) {
 
-    fun execute(id: String) = ownersRepository.getOwnerById(id)
+    suspend fun execute(id: String) = ownersRepository.getOwnerById(id)
 
 }

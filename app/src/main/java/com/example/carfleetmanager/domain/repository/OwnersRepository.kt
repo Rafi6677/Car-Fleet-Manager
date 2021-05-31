@@ -1,8 +1,6 @@
 package com.example.carfleetmanager.domain.repository
 
-import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.data.model.Owner
-import kotlinx.coroutines.flow.Flow
 
 interface OwnersRepository {
 
