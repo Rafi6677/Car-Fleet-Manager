@@ -28,6 +28,10 @@ class CarsRepositoryImpl(
         return newListOfCars
     }
 
+    override suspend fun saveCar(car: Car) {
+        carsRemoteDataSource.saveCar(car)
+    }
+
     private suspend fun getCarsFromAPI(): List<Car> {
         lateinit var carList: List<Car>
 

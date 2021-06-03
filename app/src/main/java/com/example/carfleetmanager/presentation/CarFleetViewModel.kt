@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.carlist
+package com.example.carfleetmanager.presentation
 
 import android.app.Application
 import android.content.Context
@@ -17,16 +17,15 @@ import com.example.carfleetmanager.domain.usecase.UpdateOwnersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class CarListViewModel @Inject constructor(
-    private val app: Application,
-    private val getCarsUseCase: GetCarsUseCase,
-    private val updateCarsUseCase: UpdateCarsUseCase,
-    private val getOwnersUseCase: GetOwnersUseCase,
-    private val updateOwnersUseCase: UpdateOwnersUseCase
+class CarFleetViewModel @Inject constructor(
+        private val app: Application,
+        private val getCarsUseCase: GetCarsUseCase,
+        private val updateCarsUseCase: UpdateCarsUseCase,
+        private val getOwnersUseCase: GetOwnersUseCase,
+        private val updateOwnersUseCase: UpdateOwnersUseCase
 ) : AndroidViewModel(app) {
 
     @Suppress("DEPRECATION")
@@ -81,5 +80,4 @@ class CarListViewModel @Inject constructor(
     fun updateOwnerList() = viewModelScope.launch(Dispatchers.IO) {
         ownerList.postValue(updateOwnersUseCase.execute())
     }
-
 }

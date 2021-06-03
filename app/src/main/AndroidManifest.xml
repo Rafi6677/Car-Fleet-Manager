@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.addnewcar.AddNewCarActivity"></activity>
-        <activity android:name=".presentation.carlist.CarListActivity">
+        <activity android:name=".presentation.cars.CarsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

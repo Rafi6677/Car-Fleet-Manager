@@ -6,5 +6,6 @@ interface CarsRepository {
 
     suspend fun getCars(): List<Car>?
     suspend fun updateCars(): List<Car>?
+    suspend fun saveCar(car: Car)
 
 }

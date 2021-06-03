@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.carlist
+package com.example.carfleetmanager.presentation.cars
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

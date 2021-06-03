@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.carlist
+package com.example.carfleetmanager.presentation.cars
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.FragmentCarListBinding
+import com.example.carfleetmanager.presentation.CarFleetViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CarListFragment : Fragment() {
 
     private lateinit var binding: FragmentCarListBinding
-    private lateinit var viewModel: CarListViewModel
+    private lateinit var viewModel: CarFleetViewModel
     private lateinit var carsAdapter: CarsAdapter
 
     override fun onCreateView(
@@ -27,7 +28,7 @@ class CarListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCarListBinding.bind(view)
-        viewModel = (activity as CarListActivity).viewModel
+        viewModel = (activity as CarsActivity).viewModel
         carsAdapter = CarsAdapter()
 
         initRecyclerView()

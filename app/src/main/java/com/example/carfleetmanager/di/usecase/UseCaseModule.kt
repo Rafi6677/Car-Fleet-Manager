@@ -53,4 +53,12 @@ class UseCaseModule {
         return UpdateOwnersUseCase(ownersRepository)
     }
 
+    @Singleton
+    @Provides
+    fun provideSaveCarUseCase(
+        carsRepository: CarsRepository
+    ): SaveCarUseCase {
+        return SaveCarUseCase(carsRepository)
+    }
+
 }

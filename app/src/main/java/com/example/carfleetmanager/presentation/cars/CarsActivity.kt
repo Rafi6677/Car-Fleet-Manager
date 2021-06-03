@@ -1,28 +1,28 @@
-package com.example.carfleetmanager.presentation.carlist
+package com.example.carfleetmanager.presentation.cars
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
 import com.example.carfleetmanager.R
-import com.example.carfleetmanager.databinding.ActivityCarListBinding
+import com.example.carfleetmanager.databinding.ActivityCarsBinding
+import com.example.carfleetmanager.presentation.CarFleetViewModel
 import com.example.carfleetmanager.presentation.addnewcar.AddNewCarActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CarListActivity : AppCompatActivity() {
+class CarsActivity : AppCompatActivity() {
 
-    val viewModel by viewModels<CarListViewModel>()
-    private lateinit var binding: ActivityCarListBinding
+    val viewModel by viewModels<CarFleetViewModel>()
+    private lateinit var binding: ActivityCarsBinding
     private lateinit var viewPagerAdapter: CarListViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityCarListBinding.inflate(layoutInflater)
+        binding = ActivityCarsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initViewPager()
