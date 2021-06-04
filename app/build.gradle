@@ -19,6 +19,7 @@ android {
 
         buildConfigField("String", "API_KEY", API_KEY)
         buildConfigField("String", "BASE_API_URL", BASE_API_URL)
+        buildConfigField("String", "MAP_KEY", MAP_KEY)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,6 +45,7 @@ android {
 dependencies {
     def lifecycle_version = "2.3.1"
     def room_version = "2.3.0"
+    def map_version = "17.0.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -109,4 +111,7 @@ dependencies {
 
     //Color Picker
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
+
+    //Map
+    implementation "com.google.android.gms:play-services-maps:$map_version"
 }

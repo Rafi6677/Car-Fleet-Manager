@@ -34,5 +34,6 @@
     <string name="add_new_car">Add new car</string>
     <string name="select_owner">Select owner</string>
     <string name="car_details">Car details</string>
+    <string name="car_location">Car location</string>
     <string name="save">Save</string>
 </resources>

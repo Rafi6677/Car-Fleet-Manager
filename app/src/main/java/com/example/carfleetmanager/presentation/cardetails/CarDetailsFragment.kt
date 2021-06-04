@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.cars.cardetails
+package com.example.carfleetmanager.presentation.cardetails
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarDetailsBinding
@@ -73,6 +74,20 @@ class CarDetailsFragment : Fragment() {
         binding.backImageButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        binding.coordinatesCardView.setOnClickListener {
+            showCarLocationOnMap()
+        }
+    }
+
+    private fun showCarLocationOnMap() {
+        val bundle = Bundle().apply {
+            putSerializable("car", car)
+        }
+
+        findNavController().navigate(
+            R.id.action_carDetailsFragment_to_carMapLocationFragment,
+            bundle
+        )
     }
 
 }

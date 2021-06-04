@@ -5,6 +5,14 @@
 
     <fragment
         android:id="@+id/carDetailsFragment"
-        android:name="com.example.carfleetmanager.presentation.cars.cardetails.CarDetailsFragment"
-        android:label="CarDetailsFragment" />
+        android:name="com.example.carfleetmanager.presentation.cardetails.CarDetailsFragment"
+        android:label="CarDetailsFragment" >
+        <action
+            android:id="@+id/action_carDetailsFragment_to_carMapLocationFragment"
+            app:destination="@id/carMapLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carMapLocationFragment"
+        android:name="com.example.carfleetmanager.presentation.cardetails.CarMapLocationFragment"
+        android:label="CarMapLocationFragment"/>
 </navigation>

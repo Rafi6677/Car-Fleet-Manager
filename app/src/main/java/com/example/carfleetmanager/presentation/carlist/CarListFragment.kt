@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.cars.carlist
+package com.example.carfleetmanager.presentation.carlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.example.carfleetmanager.R
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarListBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
-import com.example.carfleetmanager.presentation.cars.cardetails.CarDetailsActivity
+import com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 
 class CarListFragment : Fragment() {

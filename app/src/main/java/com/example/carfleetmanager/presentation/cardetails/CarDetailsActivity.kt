@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.cars.cardetails
+package com.example.carfleetmanager.presentation.cardetails
 
 import android.os.Bundle
 import androidx.activity.viewModels

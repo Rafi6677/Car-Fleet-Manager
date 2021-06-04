@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.cars.carlist
+package com.example.carfleetmanager.presentation.carlist
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

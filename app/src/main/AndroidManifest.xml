@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".CarFleetManagerApp"
@@ -13,9 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAnaPQ84wDl70Q60QRopZxdOkxG6id5W7k"/>
+
         <activity android:name=".presentation.addnewcar.AddNewCarActivity"></activity>
-        <activity android:name=".presentation.cars.cardetails.CarDetailsActivity"></activity>
-        <activity android:name=".presentation.cars.carlist.CarsActivity">
+        <activity android:name="com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity"></activity>
+        <activity android:name="com.example.carfleetmanager.presentation.carlist.CarsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
