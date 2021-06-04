@@ -1,5 +1,6 @@
-package com.example.carfleetmanager.presentation.cars
+package com.example.carfleetmanager.presentation.cars.carlist
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carfleetmanager.R
+import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarListBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
+import com.example.carfleetmanager.presentation.cars.cardetails.CarDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 
 class CarListFragment : Fragment() {
@@ -30,6 +33,9 @@ class CarListFragment : Fragment() {
         binding = FragmentCarListBinding.bind(view)
         viewModel = (activity as CarsActivity).viewModel
         carsAdapter = CarsAdapter()
+        carsAdapter.setOnItemClickListener {
+            onItemClickListener(it)
+        }
 
         initRecyclerView()
         displayCarList()
@@ -41,6 +47,17 @@ class CarListFragment : Fragment() {
             adapter = carsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+    }
+
+    private fun onItemClickListener(car: Car) {
+        val bundle = Bundle().apply {
+            putSerializable("car", car)
+        }
+        val intent = Intent(requireActivity(), CarDetailsActivity::class.java).apply {
+            putExtras(bundle)
+        }
+
+        startActivity(intent)
     }
 
     private fun displayCarList() {

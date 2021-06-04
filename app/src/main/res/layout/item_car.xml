@@ -46,7 +46,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_22ssp"
                 android:textStyle="bold"
-
                 app:layout_constraintBottom_toBottomOf="@+id/registration_plate_imageView"
                 app:layout_constraintEnd_toEndOf="@+id/registration_plate_imageView"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -4,6 +4,7 @@ package com.example.carfleetmanager.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = "cars")
 data class Car(
@@ -32,4 +33,4 @@ data class Car(
     val recent: Boolean,
     @SerializedName("_recent_changed")
     val recentChanged: Boolean
-)
+) : Serializable

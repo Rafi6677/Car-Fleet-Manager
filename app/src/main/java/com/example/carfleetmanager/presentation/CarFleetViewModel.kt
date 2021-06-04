@@ -10,10 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.data.model.Owner
-import com.example.carfleetmanager.domain.usecase.GetCarsUseCase
-import com.example.carfleetmanager.domain.usecase.GetOwnersUseCase
-import com.example.carfleetmanager.domain.usecase.UpdateCarsUseCase
-import com.example.carfleetmanager.domain.usecase.UpdateOwnersUseCase
+import com.example.carfleetmanager.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +22,7 @@ class CarFleetViewModel @Inject constructor(
         private val getCarsUseCase: GetCarsUseCase,
         private val updateCarsUseCase: UpdateCarsUseCase,
         private val getOwnersUseCase: GetOwnersUseCase,
+        private val getOwnerByIdUseCase: GetOwnerByIdUseCase,
         private val updateOwnersUseCase: UpdateOwnersUseCase
 ) : AndroidViewModel(app) {
 
@@ -79,5 +77,11 @@ class CarFleetViewModel @Inject constructor(
 
     fun updateOwnerList() = viewModelScope.launch(Dispatchers.IO) {
         ownerList.postValue(updateOwnersUseCase.execute())
+    }
+
+    val owner: MutableLiveData<Owner> = MutableLiveData()
+
+    fun getOwnerById(id: String) = viewModelScope.launch(Dispatchers.IO) {
+        owner.postValue(getOwnerByIdUseCase.execute(id))
     }
 }

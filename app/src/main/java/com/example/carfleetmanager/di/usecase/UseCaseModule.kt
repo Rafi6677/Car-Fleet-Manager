@@ -25,8 +25,8 @@ class UseCaseModule {
     @Provides
     fun provideGetOwnerByIdUseCase(
         ownersRepository: OwnersRepository
-    ): GetOwnerById {
-        return GetOwnerById(ownersRepository)
+    ): GetOwnerByIdUseCase {
+        return GetOwnerByIdUseCase(ownersRepository)
     }
 
     @Singleton

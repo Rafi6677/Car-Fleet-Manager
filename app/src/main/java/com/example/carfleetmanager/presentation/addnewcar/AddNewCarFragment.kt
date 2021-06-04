@@ -45,8 +45,8 @@ class AddNewCarFragment : Fragment() {
             binding.carColorImageView.setImageResource(R.drawable.ic_car2)
         } else {
             ImageViewCompat.setImageTintList(
-                    binding.carColorImageView,
-                    ColorStateList.valueOf(addCarViewModel.color.substringAfter("#").toInt())
+                binding.carColorImageView,
+                ColorStateList.valueOf(Color.parseColor(addCarViewModel.color))
             )
         }
 
@@ -87,6 +87,7 @@ class AddNewCarFragment : Fragment() {
                     monthValue = "0$monthValue"
 
                 binding.productionDateValueTextView.text = "$dayValue/$monthValue/$mYear"
+                addCarViewModel.productionDate = "$dayValue/$monthValue/$mYear"
             }, year, month, day)
 
             dialog.show()

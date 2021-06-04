@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/add_new_car"
+        android:text="@string/car_details"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
@@ -37,16 +37,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@+id/save_car_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/car_details_info_textView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/main_data_CardView"
@@ -64,76 +63,83 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/_10sdp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/registration_number_textInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorAccent"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/colorPrimaryDark"
-                        app:errorEnabled="true"
-                        app:hintTextColor="@color/colorAccent"
+                    <ImageView
+                        android:id="@+id/registration_plate_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/registration_number"
+                        android:src="@drawable/ic_registration_plate"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/registration_number"
-                            android:inputType="textCapCharacters"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/_16ssp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/brand_textInput"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/registration_number_textView"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorAccent"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/colorPrimaryDark"
-                        app:errorEnabled="true"
-                        app:hintTextColor="@color/colorAccent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:text="@string/registration_number_example"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_22ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/registration_plate_imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/registration_plate_imageView"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/registration_plate_imageView"
+                        app:layout_constraintTop_toTopOf="@+id/registration_plate_imageView" />
+
+                    <TextView
+                        android:id="@+id/brand_info_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/brand"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_16ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/registration_number_textInput"
-                        app:placeholderTextColor="@color/colorPrimaryDark">
+                        app:layout_constraintTop_toBottomOf="@+id/registration_plate_imageView" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/brand"
-                            android:inputType="textCapWords"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/_16ssp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/model_textInput"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/brand_value_textView"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorAccent"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/colorPrimaryDark"
-                        app:errorEnabled="true"
-                        app:hintTextColor="@color/colorAccent"
+                        android:text="@string/brand_example"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/brand_info_textView"
+                        app:layout_constraintStart_toStartOf="@+id/model_value_textView"
+                        app:layout_constraintTop_toTopOf="@+id/brand_info_textView" />
+
+                    <TextView
+                        android:id="@+id/model_info_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:text="@string/model"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_16ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/brand_textInput">
+                        app:layout_constraintTop_toBottomOf="@id/brand_info_textView" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="@string/model"
-                            android:inputType="textCapWords"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/_16ssp" />
+                    <TextView
+                        android:id="@+id/model_value_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:text="@string/model_example"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/model_info_textView"
+                        app:layout_constraintTop_toBottomOf="@id/brand_info_textView" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,18 +184,6 @@
                         app:layout_constraintStart_toEndOf="@+id/production_date_info_textView"
                         app:layout_constraintTop_toTopOf="@+id/production_date_info_textView" />
 
-                    <ImageView
-                        android:id="@+id/production_date_picker_imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:src="@drawable/ic_edit"
-                        app:layout_constraintBottom_toBottomOf="@+id/production_date_value_textView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/production_date_value_textView"
-                        app:layout_constraintTop_toTopOf="@+id/production_date_value_textView"
-                        app:tint="@color/colorAccent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -232,18 +226,6 @@
                         app:layout_constraintStart_toEndOf="@+id/color_info_textView"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/color_picker_imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:src="@drawable/ic_edit"
-                        app:layout_constraintBottom_toBottomOf="@+id/car_color_imageView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/car_color_imageView"
-                        app:layout_constraintTop_toTopOf="@+id/car_color_imageView"
-                        app:tint="@color/colorAccent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -284,18 +266,6 @@
                         app:layout_constraintBottom_toBottomOf="@+id/owner_info_textView"
                         app:layout_constraintStart_toEndOf="@+id/owner_info_textView"
                         app:layout_constraintTop_toTopOf="@+id/owner_info_textView" />
-
-                    <ImageView
-                        android:id="@+id/owner_picker_imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:src="@drawable/ic_edit"
-                        app:layout_constraintBottom_toBottomOf="@+id/owner_value_textView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/owner_value_textView"
-                        app:layout_constraintTop_toTopOf="@+id/owner_value_textView"
-                        app:tint="@color/colorAccent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -345,7 +315,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="@string/blank"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/_16ssp"
+                        android:textSize="@dimen/_14ssp"
                         app:layout_constraintBottom_toBottomOf="@+id/latitude_info_textView"
                         app:layout_constraintStart_toEndOf="@+id/longitude_info_textView"
                         app:layout_constraintTop_toTopOf="@+id/latitude_info_textView" />
@@ -370,7 +340,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="@string/blank"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/_16ssp"
+                        android:textSize="@dimen/_14ssp"
                         app:layout_constraintBottom_toBottomOf="@+id/longitude_info_textView"
                         app:layout_constraintStart_toEndOf="@+id/longitude_info_textView"
                         app:layout_constraintTop_toTopOf="@+id/longitude_info_textView"
@@ -395,19 +365,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <Button
-        android:id="@+id/save_car_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

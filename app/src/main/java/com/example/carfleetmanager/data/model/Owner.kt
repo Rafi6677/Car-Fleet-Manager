@@ -3,6 +3,7 @@ package com.example.carfleetmanager.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = "owners")
 data class Owner(
@@ -19,4 +20,4 @@ data class Owner(
     val mock: Boolean,
     @SerializedName("sex")
     val sex: String
-)
+) : Serializable

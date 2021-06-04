@@ -1,4 +1,4 @@
-package com.example.carfleetmanager.presentation.cars
+package com.example.carfleetmanager.presentation.cars.carlist
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -8,6 +8,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.carfleetmanager.R
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.ItemCarBinding
 
@@ -26,6 +27,10 @@ class CarsAdapter : RecyclerView.Adapter<CarsAdapter.CarsViewHolder>() {
     }
 
     val differ = AsyncListDiffer(this, callback)
+
+    fun setOnItemClickListener(clickListener: (Car) -> Unit) {
+        onItemClickListener = clickListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarsViewHolder {
         val binding = ItemCarBinding.inflate(
@@ -46,10 +51,6 @@ class CarsAdapter : RecyclerView.Adapter<CarsAdapter.CarsViewHolder>() {
         return differ.currentList.size
     }
 
-    fun setOnItemClickListener(listener: (Car)->Unit) {
-        onItemClickListener = listener
-    }
-
     inner class CarsViewHolder(
         private val binding: ItemCarBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -59,12 +60,15 @@ class CarsAdapter : RecyclerView.Adapter<CarsAdapter.CarsViewHolder>() {
             binding.brandTextView.text = car.brand
             binding.modelTextView.text = car.model
 
-            ImageViewCompat.setImageTintList(
-                    binding.colorImageView,
-                    ColorStateList.valueOf(
-                            Color.parseColor(car.color)
-                    )
-            )
+            if (car.color == "#ffffff" || car.color == "#fff") {
+                binding.colorImageView.setBackgroundResource(R.drawable.ic_car2)
+                binding.colorImageView.imageTintList = null
+            } else {
+                ImageViewCompat.setImageTintList(
+                        binding.colorImageView,
+                        ColorStateList.valueOf(Color.parseColor(car.color))
+                )
+            }
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let {
