@@ -33,6 +33,7 @@ class CarsActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         viewPagerAdapter = CarListViewPagerAdapter(fragmentManager, lifecycle)
         binding.carListViewPager.adapter = viewPagerAdapter
+        binding.carListViewPager.isUserInputEnabled = false
 
         binding.carListTabLayout.apply {
             addTab(this.newTab().setText(resources.getString(R.string.car_list)))

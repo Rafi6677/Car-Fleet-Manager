@@ -18,12 +18,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CarFleetViewModel @Inject constructor(
-        private val app: Application,
-        private val getCarsUseCase: GetCarsUseCase,
-        private val updateCarsUseCase: UpdateCarsUseCase,
-        private val getOwnersUseCase: GetOwnersUseCase,
-        private val getOwnerByIdUseCase: GetOwnerByIdUseCase,
-        private val updateOwnersUseCase: UpdateOwnersUseCase
+    private val app: Application,
+    private val getCarsUseCase: GetCarsUseCase,
+    private val updateCarsUseCase: UpdateCarsUseCase,
+    private val getOwnersUseCase: GetOwnersUseCase,
+    private val getOwnerByIdUseCase: GetOwnerByIdUseCase,
+    private val updateOwnersUseCase: UpdateOwnersUseCase
 ) : AndroidViewModel(app) {
 
     @Suppress("DEPRECATION")

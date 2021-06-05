@@ -39,7 +39,7 @@ class CarListFragment : Fragment() {
 
         initRecyclerView()
         displayCarList()
-        initSwipeContainer()
+        initSwipeContainer(view)
     }
 
     private fun initRecyclerView() {
@@ -80,20 +80,25 @@ class CarListFragment : Fragment() {
         })
     }
 
-    private fun initSwipeContainer() {
+    private fun initSwipeContainer(view: View) {
         binding.swipeRefreshContainer.let {
             it.setOnRefreshListener {
-                updateData()
+                updateData(view)
                 it.isRefreshing = false
             }
         }
     }
 
-    private fun updateData() {
-        carsAdapter.differ.submitList(emptyList())
-        showProgressBar()
-        viewModel.updateOwnerList()
-        viewModel.updateCarList()
+    private fun updateData(view: View) {
+        if (!viewModel.isNetworkAvailable(activity as CarsActivity)) {
+            Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
+                    .show()
+        } else {
+            carsAdapter.differ.submitList(emptyList())
+            showProgressBar()
+            viewModel.updateOwnerList()
+            viewModel.updateCarList()
+        }
     }
 
     private fun showProgressBar() {

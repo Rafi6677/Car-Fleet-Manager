@@ -14,6 +14,8 @@ import com.example.carfleetmanager.R
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarDetailsBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
+import com.example.carfleetmanager.presentation.carlist.CarsActivity
+import com.google.android.material.snackbar.Snackbar
 
 class CarDetailsFragment : Fragment() {
 
@@ -75,19 +77,24 @@ class CarDetailsFragment : Fragment() {
             requireActivity().onBackPressed()
         }
         binding.coordinatesCardView.setOnClickListener {
-            showCarLocationOnMap()
+            showCarLocationOnMap(it)
         }
     }
 
-    private fun showCarLocationOnMap() {
-        val bundle = Bundle().apply {
-            putSerializable("car", car)
-        }
+    private fun showCarLocationOnMap(view: View) {
+        if (!viewModel.isNetworkAvailable(activity as CarDetailsActivity)) {
+            Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
+                    .show()
+        } else {
+            val bundle = Bundle().apply {
+                putSerializable("car", car)
+            }
 
-        findNavController().navigate(
-            R.id.action_carDetailsFragment_to_carMapLocationFragment,
-            bundle
-        )
+            findNavController().navigate(
+                    R.id.action_carDetailsFragment_to_carMapLocationFragment,
+                    bundle
+            )
+        }
     }
 
 }

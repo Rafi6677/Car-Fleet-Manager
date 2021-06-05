@@ -36,4 +36,6 @@
     <string name="car_details">Car details</string>
     <string name="car_location">Car location</string>
     <string name="save">Save</string>
+
+    <string name="check_internet_connection">Please check Your Internet connection.</string>
 </resources>
