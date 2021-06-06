@@ -53,7 +53,7 @@ class CarMapLocationFragment : Fragment() {
             }
             map.apply {
                 clear()
-                animateCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 10.toFloat()))
+                animateCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 16f))
                 addMarker(markerOptions)
             }
         }

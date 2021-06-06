@@ -1,7 +1,9 @@
 package com.example.carfleetmanager.presentation.addnewcar
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -10,12 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.FragmentAddNewCarBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
+import com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity
 import com.example.carfleetmanager.presentation.util.ConnectionUtils
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.util.*
@@ -61,9 +66,11 @@ class AddNewCarFragment : Fragment() {
     }
 
     private fun initButtons() {
+        initInputData()
         initProductionDatePicker()
         initCarColorPicker()
         initOwnerPicker()
+        initLocationPicker()
 
         binding.backImageButton.setOnClickListener {
             requireActivity().onBackPressed()
@@ -73,8 +80,39 @@ class AddNewCarFragment : Fragment() {
                 Snackbar.make(it, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
                         .show()
             } else {
-               saveCar()
+               saveCar(it)
            }
+        }
+    }
+
+    private fun initInputData() {
+        binding.registrationNumberTextInput.editText!!.doOnTextChanged { text, start, before, count ->
+            if (text!!.isEmpty()) {
+                binding.registrationNumberTextInput.error = resources.getString(R.string.empty_field_error)
+            } else {
+                binding.registrationNumberTextInput.error = null
+            }
+
+            addCarViewModel.registrationNumber = text.toString()
+        }
+        binding.brandTextInput.editText!!.doOnTextChanged { text, start, before, count ->
+            if (text!!.isEmpty()) {
+                binding.brandTextInput.error = resources.getString(R.string.empty_field_error)
+            } else {
+                binding.brandTextInput.error = null
+                addCarViewModel
+            }
+
+            addCarViewModel.brand = text.toString()
+        }
+        binding.modelTextInput.editText!!.doOnTextChanged { text, start, before, count ->
+            if (text!!.isEmpty()) {
+                binding.modelTextInput.error = resources.getString(R.string.empty_field_error)
+            } else {
+                binding.modelTextInput.error = null
+            }
+
+            addCarViewModel.model = text.toString()
         }
     }
 
@@ -122,8 +160,8 @@ class AddNewCarFragment : Fragment() {
                             binding.carColorImageView.imageTintList = null
                         } else {
                             ImageViewCompat.setImageTintList(
-                                    binding.carColorImageView,
-                                    ColorStateList.valueOf(initialColor)
+                                binding.carColorImageView,
+                                ColorStateList.valueOf(initialColor)
                             )
                         }
                     }
@@ -155,30 +193,69 @@ class AddNewCarFragment : Fragment() {
     private fun initOwnerPicker() {
         binding.ownerCardView.setOnClickListener {
             findNavController().navigate(
-                    R.id.action_addNewCarFragment_to_selectOwnerFragment
+                R.id.action_addNewCarFragment_to_selectOwnerFragment
             )
         }
     }
 
-    private fun saveCar() {
+    private fun initLocationPicker() {
+        binding.coordinatesCardView.setOnClickListener { view ->
+            if (!ConnectionUtils.isNetworkAvailable(activity as AddNewCarActivity)) {
+                Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
+                    .show()
+            } else if (addCarViewModel.latitude == "-" || addCarViewModel.longitude == "-") {
+                findNavController().navigate(
+                    R.id.action_addNewCarFragment_to_selectCarLocationFragment
+                )
+            } else {
+                val bundle = Bundle().apply {
+                    putDouble("latitude", addCarViewModel.latitude.toDouble())
+                    putDouble("longitude", addCarViewModel.longitude.toDouble())
+                }
 
+                findNavController().navigate(
+                    R.id.action_addNewCarFragment_to_selectCarLocationFragment,
+                    bundle
+                )
+            }
+        }
+    }
+
+    private fun saveCar(view: View) {
+        if (isDataCorrectToSave()) {
+
+        } else {
+            Snackbar.make(view, resources.getString(R.string.empty_data_saving_error), Snackbar.LENGTH_LONG)
+                    .show()
+        }
     }
 
     private fun isDataCorrectToSave(): Boolean {
-        if (addCarViewModel.registrationNumber == ""
-                || addCarViewModel.registrationNumber.length < 3) {
-            return false
-        } else if (addCarViewModel.brand == "" || addCarViewModel.model == "") {
-            return false
-        } else if (addCarViewModel.productionDate == "__ / __ / ____") {
-            return false
-        } else if (addCarViewModel.ownerName == "-") {
-            return false
-        } else if(addCarViewModel.latitude == "-" || addCarViewModel.longitude == "-") {
-            return false
+        var isDataCorrect = true
+
+        if (addCarViewModel.registrationNumber == "") {
+            isDataCorrect = false
+            binding.registrationNumberTextInput.error = resources.getString(R.string.empty_field_error)
+        }
+        if (addCarViewModel.brand == "") {
+            isDataCorrect = false
+            binding.brandTextInput.error = resources.getString(R.string.empty_field_error)
+        }
+        if (addCarViewModel.model == "") {
+            isDataCorrect = false
+            binding.modelTextInput.error = resources.getString(R.string.empty_field_error)
+        }
+        if (addCarViewModel.productionDate == "__ / __ / ____") {
+            isDataCorrect = false
+        }
+        if (addCarViewModel.ownerName == "-") {
+            isDataCorrect = false
+        }
+        if(addCarViewModel.latitude == "-" || addCarViewModel.longitude == "-") {
+            isDataCorrect = false
         }
 
-        return true
+        return isDataCorrect
     }
 
 }

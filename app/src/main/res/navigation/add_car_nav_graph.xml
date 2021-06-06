@@ -13,9 +13,16 @@
         <action
             android:id="@+id/action_addNewCarFragment_to_selectOwnerFragment"
             app:destination="@id/selectOwnerFragment" />
+        <action
+            android:id="@+id/action_addNewCarFragment_to_selectCarLocationFragment"
+            app:destination="@id/selectCarLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectOwnerFragment"
         android:name="com.example.carfleetmanager.presentation.addnewcar.SelectOwnerFragment"
         android:label="SelectOwnerFragment" />
+    <fragment
+        android:id="@+id/selectCarLocationFragment"
+        android:name="com.example.carfleetmanager.presentation.addnewcar.SelectCarLocationFragment"
+        android:label="SelectCarLocationFragment" />
 </navigation>

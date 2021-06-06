@@ -91,8 +91,8 @@ class CarDetailsFragment : Fragment() {
             }
 
             findNavController().navigate(
-                    R.id.action_carDetailsFragment_to_carMapLocationFragment,
-                    bundle
+                R.id.action_carDetailsFragment_to_carMapLocationFragment,
+                bundle
             )
         }
     }
