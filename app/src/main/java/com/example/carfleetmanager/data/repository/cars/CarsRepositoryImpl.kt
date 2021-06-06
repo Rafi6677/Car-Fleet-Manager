@@ -1,17 +1,20 @@
 package com.example.carfleetmanager.data.repository.cars
 
+import android.app.Application
 import android.util.Log
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsCacheDataSource
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsLocalDataSource
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsRemoteDataSource
 import com.example.carfleetmanager.domain.repository.CarsRepository
+import com.example.carfleetmanager.presentation.util.ConnectionUtils
 import java.lang.Exception
 
 class CarsRepositoryImpl(
-        private val carsRemoteDataSource: CarsRemoteDataSource,
-        private val carsLocalDataSource: CarsLocalDataSource,
-        private val carsCacheDataSource: CarsCacheDataSource
+    private val app: Application,
+    private val carsRemoteDataSource: CarsRemoteDataSource,
+    private val carsLocalDataSource: CarsLocalDataSource,
+    private val carsCacheDataSource: CarsCacheDataSource
 ) : CarsRepository {
 
     override suspend fun getCars(): List<Car>? {
@@ -60,6 +63,8 @@ class CarsRepositoryImpl(
 
         if (carList.isNotEmpty()) {
             return carList
+        } else if (!ConnectionUtils.isNetworkAvailable(app)) {
+            return ArrayList()
         } else {
             carList = getCarsFromAPI()
             carsLocalDataSource.saveCarsToDB(carList)

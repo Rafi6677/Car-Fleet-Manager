@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.FragmentAddNewCarBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
+import com.example.carfleetmanager.presentation.util.ConnectionUtils
 import com.google.android.material.snackbar.Snackbar
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.util.*
@@ -68,7 +69,7 @@ class AddNewCarFragment : Fragment() {
             requireActivity().onBackPressed()
         }
         binding.saveCarButton.setOnClickListener {
-           if (!carFleetViewModel.isNetworkAvailable(activity as AddNewCarActivity)) {
+           if (!ConnectionUtils.isNetworkAvailable(activity as AddNewCarActivity)) {
                 Snackbar.make(it, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
                         .show()
             } else {

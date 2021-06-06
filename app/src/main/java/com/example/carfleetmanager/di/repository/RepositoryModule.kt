@@ -1,5 +1,6 @@
 package com.example.carfleetmanager.di.repository
 
+import android.app.Application
 import com.example.carfleetmanager.data.repository.cars.CarsRepositoryImpl
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsCacheDataSource
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsLocalDataSource
@@ -23,11 +24,13 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideCarsRepository(
+            app: Application,
             carsRemoteDataSource: CarsRemoteDataSource,
             carsLocalDataSource: CarsLocalDataSource,
             carsCacheDataSource: CarsCacheDataSource
     ): CarsRepository {
         return CarsRepositoryImpl(
+            app,
             carsRemoteDataSource,
             carsLocalDataSource,
             carsCacheDataSource
@@ -37,11 +40,13 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideOwnersRepository(
+        app: Application,
         ownersRemoteDataSource: OwnersRemoteDataSource,
         ownersLocalDataSource: OwnersLocalDataSource,
         ownersCacheDataSource: OwnersCacheDataSource
     ): OwnersRepository {
         return OwnersRepositoryImpl(
+            app,
             ownersRemoteDataSource,
             ownersLocalDataSource,
             ownersCacheDataSource

@@ -1,14 +1,17 @@
 package com.example.carfleetmanager.data.repository.owners
 
+import android.app.Application
 import android.util.Log
 import com.example.carfleetmanager.data.model.Owner
 import com.example.carfleetmanager.data.repository.owners.datasource.OwnersCacheDataSource
 import com.example.carfleetmanager.data.repository.owners.datasource.OwnersLocalDataSource
 import com.example.carfleetmanager.data.repository.owners.datasource.OwnersRemoteDataSource
 import com.example.carfleetmanager.domain.repository.OwnersRepository
+import com.example.carfleetmanager.presentation.util.ConnectionUtils
 import java.lang.Exception
 
 class OwnersRepositoryImpl(
+    private val app: Application,
     private val ownersRemoteDataSource: OwnersRemoteDataSource,
     private val ownersLocalDataSource: OwnersLocalDataSource,
     private val ownersCacheDataSource: OwnersCacheDataSource
@@ -55,11 +58,13 @@ class OwnersRepositoryImpl(
         try {
             ownerList = ownersLocalDataSource.getOwnersFromDB()
         } catch (e: Exception) {
-            Log.i("Cars_DB_Tag", e.message.toString())
+            Log.i("Owners_DB_Tag", e.message.toString())
         }
 
         if (ownerList.isNotEmpty()) {
             return ownerList
+        } else if (!ConnectionUtils.isNetworkAvailable(app)) {
+            return ArrayList()
         } else {
             ownerList = getOwnersFromAPI()
             ownersLocalDataSource.saveOwnersToDB(ownerList)
@@ -74,7 +79,7 @@ class OwnersRepositoryImpl(
         try {
             ownerList = ownersCacheDataSource.getOwnersFromCache()
         } catch (e: Exception) {
-            Log.i("Cars_Cache_Tag", e.message.toString())
+            Log.i("Owners_Cache_Tag", e.message.toString())
         }
 
         if (ownerList.isNotEmpty()) {

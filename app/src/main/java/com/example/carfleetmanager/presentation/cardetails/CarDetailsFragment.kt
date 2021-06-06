@@ -14,7 +14,7 @@ import com.example.carfleetmanager.R
 import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarDetailsBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
-import com.example.carfleetmanager.presentation.carlist.CarsActivity
+import com.example.carfleetmanager.presentation.util.ConnectionUtils
 import com.google.android.material.snackbar.Snackbar
 
 class CarDetailsFragment : Fragment() {
@@ -82,7 +82,7 @@ class CarDetailsFragment : Fragment() {
     }
 
     private fun showCarLocationOnMap(view: View) {
-        if (!viewModel.isNetworkAvailable(activity as CarDetailsActivity)) {
+        if (!ConnectionUtils.isNetworkAvailable(activity as CarDetailsActivity)) {
             Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
                     .show()
         } else {

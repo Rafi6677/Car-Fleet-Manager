@@ -12,6 +12,7 @@ import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarListBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
 import com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity
+import com.example.carfleetmanager.presentation.util.ConnectionUtils
 import com.google.android.material.snackbar.Snackbar
 
 class CarListFragment : Fragment() {
@@ -67,14 +68,15 @@ class CarListFragment : Fragment() {
         viewModel.getOwnerList()
         viewModel.getCarList()
         viewModel.carList.observe(viewLifecycleOwner, { response ->
-            if (response != null) {
+            if (response.isNotEmpty()) {
                 hideProgressBar()
+                hideNoDataFoundInfo()
                 carsAdapter.differ.submitList(response)
                 carsAdapter.notifyDataSetChanged()
             } else {
                 hideProgressBar()
                 showNoDataFoundInfo()
-                Snackbar.make(requireView(), resources.getString(R.string.no_car_data_found), Snackbar.LENGTH_LONG)
+                Snackbar.make(requireView(), resources.getString(R.string.check_internet_connection_no_car_data), Snackbar.LENGTH_LONG)
                         .show()
             }
         })
@@ -90,7 +92,7 @@ class CarListFragment : Fragment() {
     }
 
     private fun updateData(view: View) {
-        if (!viewModel.isNetworkAvailable(activity as CarsActivity)) {
+        if (!ConnectionUtils.isNetworkAvailable(activity as CarsActivity)) {
             Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
                     .show()
         } else {

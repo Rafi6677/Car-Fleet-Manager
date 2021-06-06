@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="MAP_KEY"/>
+            android:value="AIzaSyAnaPQ84wDl70Q60QRopZxdOkxG6id5W7k"/>
 
         <activity android:name=".presentation.addnewcar.AddNewCarActivity"></activity>
         <activity android:name="com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity"></activity>

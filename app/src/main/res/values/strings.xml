@@ -38,4 +38,6 @@
     <string name="save">Save</string>
 
     <string name="check_internet_connection">Please check Your Internet connection.</string>
+    <string name="check_internet_connection_no_car_data">No car data found. Please check Your Internet connection.</string>
+    <string name="check_internet_connection_no_owner_data">No owner data found. Please check Your Internet connection.</string>
 </resources>
