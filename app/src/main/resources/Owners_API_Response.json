@@ -1,0 +1,12 @@
+[
+  {"_id":"5e5e3d7fc0ea272d00000820","first_name":"Libby","last_name":"Predovic","birth_date":"2014-02-12T00:00:00.000Z","sex":"M","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000822","first_name":"Haskell","last_name":"Deckow","birth_date":"1987-04-15T00:00:00.000Z","sex":"M","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000824","first_name":"Elisabeth","last_name":"Ryan","birth_date":"1982-01-27T00:00:00.000Z","sex":"F","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000826","first_name":"Destiney","last_name":"Braun","birth_date":"1994-07-09T00:00:00.000Z","sex":"F","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d0000081e","first_name":"Odell","last_name":"Klocko","birth_date":"1977-06-25T00:00:00.000Z","sex":"M","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000827","first_name":"Kendra","last_name":"Lubowitz","birth_date":"1983-08-26T00:00:00.000Z","sex":"F","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000825","first_name":"Jerome","last_name":"Lehner","birth_date":"1983-04-25T00:00:00.000Z","sex":"M","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000823","first_name":"Johnathon","last_name":"Dooley","birth_date":"1999-01-12T00:00:00.000Z","sex":"M","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d00000821","first_name":"Mike","last_name":"Gleason","birth_date":"1990-01-02T00:00:00.000Z","sex":"M","_mock":true},
+  {"_id":"5e5e3d7fc0ea272d0000081f","first_name":"Lazaro","last_name":"Beier","birth_date":"1979-02-19T00:00:00.000Z","sex":"M","_mock":true}
+]
