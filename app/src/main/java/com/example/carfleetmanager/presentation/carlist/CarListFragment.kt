@@ -40,6 +40,11 @@ class CarListFragment : Fragment() {
 
         initRecyclerView()
         displayCarList()
+
+        if ((activity as CarsActivity).needToBeUpdated) {
+            updateData(view)
+        }
+
         initSwipeContainer(view)
     }
 

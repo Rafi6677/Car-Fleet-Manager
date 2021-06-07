@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.FragmentSelectCarLocationBinding
+import com.example.carfleetmanager.presentation.CarFleetViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,13 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class SelectCarLocationFragment : Fragment(), OnMapReadyCallback{
-
-    private val LOCATION_PERMISSION_REQUEST_CODE = 1
-    private var permissionDenied = false
+class SelectCarLocationFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentSelectCarLocationBinding
-    private lateinit var addCarViewModel: AddCarViewModel
+    private lateinit var viewModel: CarFleetViewModel
     private lateinit var map: GoogleMap
 
     override fun onCreateView(
@@ -44,7 +42,7 @@ class SelectCarLocationFragment : Fragment(), OnMapReadyCallback{
     }
 
     private fun initMapFragment() {
-        addCarViewModel = (activity as AddNewCarActivity).addCarViewModel
+        viewModel = (activity as AddNewCarActivity).viewModel
 
         val supportMapFragment = childFragmentManager
             .findFragmentById(R.id.map_fragment) as SupportMapFragment
@@ -71,32 +69,6 @@ class SelectCarLocationFragment : Fragment(), OnMapReadyCallback{
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
-            return
-        }
-        if (ContextCompat.checkSelfPermission(
-                activity as AddNewCarActivity,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        && ContextCompat.checkSelfPermission(
-                activity as AddNewCarActivity,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            enableMyLocation()
-            setOnMapClickListener()
-        } else {
-            // Permission was denied. Display an error message
-            // Display the missing permission error dialog when the fragments resume.
-            permissionDenied = true
-        }
-    }
-
     private fun enableMyLocation() {
         if (!::map.isInitialized) return
         if (ContextCompat.checkSelfPermission(
@@ -116,7 +88,7 @@ class SelectCarLocationFragment : Fragment(), OnMapReadyCallback{
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ),
-                LOCATION_PERMISSION_REQUEST_CODE
+                (activity as AddNewCarActivity).LOCATION_PERMISSION_REQUEST_CODE
             )
         }
     }
@@ -154,7 +126,7 @@ class SelectCarLocationFragment : Fragment(), OnMapReadyCallback{
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ),
-                LOCATION_PERMISSION_REQUEST_CODE
+                (activity as AddNewCarActivity).LOCATION_PERMISSION_REQUEST_CODE
             )
         }
     }
@@ -167,19 +139,23 @@ class SelectCarLocationFragment : Fragment(), OnMapReadyCallback{
             clear()
             animateCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 16f))
             addMarker(markerOptions)
+            map.setOnMarkerClickListener { marker ->
+                showSaveLocationDialog(marker.position)
+                true
+            }
         }
     }
 
     private fun showSaveLocationDialog(latLng: LatLng) {
         val dialog = AlertDialog.Builder(activity as AddNewCarActivity)
-            .setTitle("Chosen car location")
+            .setTitle(resources.getString(R.string.chosen_car_location))
             .setMessage("Latitude: ${latLng.latitude}\nLongitude: ${latLng.longitude}")
-            .setPositiveButton("Save") { _, _ ->
-                addCarViewModel.latitude = latLng.latitude.toString()
-                addCarViewModel.longitude = latLng.longitude.toString()
+            .setPositiveButton(resources.getString(R.string.save)) { _, _ ->
+                viewModel.latitude = latLng.latitude.toString()
+                viewModel.longitude = latLng.longitude.toString()
                 requireActivity().onBackPressed()
             }
-            .setNegativeButton("Cancel") { _, _ -> }
+            .setNegativeButton(resources.getString(R.string.cancel)) { _, _ -> }
             .create()
 
         dialog.setOnShowListener {

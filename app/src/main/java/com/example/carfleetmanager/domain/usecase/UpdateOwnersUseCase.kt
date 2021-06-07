@@ -1,6 +1,5 @@
 package com.example.carfleetmanager.domain.usecase
 
-import com.example.carfleetmanager.domain.repository.CarsRepository
 import com.example.carfleetmanager.domain.repository.OwnersRepository
 
 class UpdateOwnersUseCase(private val ownersRepository: OwnersRepository) {

@@ -36,11 +36,15 @@
     <string name="select_location">Select location</string>
     <string name="car_details">Car details</string>
     <string name="car_location">Car location</string>
+    <string name="chosen_car_location">Chosen car location</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
     <string name="check_internet_connection">Please check Your Internet connection.</string>
     <string name="check_internet_connection_no_car_data">No car data found. Please check Your Internet connection.</string>
     <string name="check_internet_connection_no_owner_data">No owner data found. Please check Your Internet connection.</string>
     <string name="empty_field_error">This field can\'t be empty.</string>
     <string name="empty_data_saving_error">Some car data is empty. Make sure You have added all car\'s data information.</string>
+    <string name="save_successfully">Car saved successfully.</string>
+    <string name="saving_error">Error occurred while saving car data.</string>
 </resources>

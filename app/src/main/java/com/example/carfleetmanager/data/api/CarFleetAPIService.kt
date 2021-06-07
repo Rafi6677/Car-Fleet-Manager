@@ -1,9 +1,7 @@
 package com.example.carfleetmanager.data.api
 
 import com.example.carfleetmanager.BuildConfig
-import com.example.carfleetmanager.data.model.Car
-import com.example.carfleetmanager.data.model.CarList
-import com.example.carfleetmanager.data.model.OwnerList
+import com.example.carfleetmanager.data.model.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -29,7 +27,7 @@ interface CarFleetAPIService {
         @Query("apikey")
         apiKey: String = BuildConfig.API_KEY,
         @Body
-        car: Car
-    )
+        car: SendCar
+    ): Response<SendCarResponse>
 
 }

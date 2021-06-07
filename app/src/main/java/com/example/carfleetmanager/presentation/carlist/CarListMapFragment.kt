@@ -11,6 +11,7 @@ import com.example.carfleetmanager.data.model.Car
 import com.example.carfleetmanager.databinding.FragmentCarListMapBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
 import com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -57,7 +58,15 @@ class CarListMapFragment : Fragment() {
                         marker.tag = car
                     }
                 }
+                map.setOnMarkerClickListener { marker ->
+                    val cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                        marker.position, 16f
+                    )
 
+                    map.animateCamera(cameraUpdate)
+                    marker.showInfoWindow()
+                    true
+                }
                 map.setOnInfoWindowClickListener { marker ->
                     val car = marker.tag as Car?
 

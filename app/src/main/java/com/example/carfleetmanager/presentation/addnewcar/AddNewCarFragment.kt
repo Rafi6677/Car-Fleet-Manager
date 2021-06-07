@@ -1,7 +1,6 @@
 package com.example.carfleetmanager.presentation.addnewcar
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -18,9 +17,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.FragmentAddNewCarBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
-import com.example.carfleetmanager.presentation.cardetails.CarDetailsActivity
+import com.example.carfleetmanager.presentation.carlist.CarsActivity
 import com.example.carfleetmanager.presentation.util.ConnectionUtils
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.util.*
@@ -28,8 +26,7 @@ import java.util.*
 class AddNewCarFragment : Fragment() {
 
     private lateinit var binding: FragmentAddNewCarBinding
-    private lateinit var carFleetViewModel: CarFleetViewModel
-    private lateinit var addCarViewModel: AddCarViewModel
+    private lateinit var viewModel: CarFleetViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_new_car, container, false)
@@ -38,31 +35,30 @@ class AddNewCarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddNewCarBinding.bind(view)
-        carFleetViewModel = (activity as AddNewCarActivity).carFleetViewModel
-        addCarViewModel = (activity as AddNewCarActivity).addCarViewModel
+        viewModel = (activity as AddNewCarActivity).viewModel
 
         initData()
         initButtons()
     }
 
     private fun initData() {
-        binding.registrationNumberTextInput.editText!!.setText(addCarViewModel.registrationNumber)
-        binding.brandTextInput.editText!!.setText(addCarViewModel.brand)
-        binding.modelTextInput.editText!!.setText(addCarViewModel.model)
-        binding.productionDateValueTextView.text = addCarViewModel.productionDate
+        binding.registrationNumberTextInput.editText!!.setText(viewModel.registrationNumber)
+        binding.brandTextInput.editText!!.setText(viewModel.brand)
+        binding.modelTextInput.editText!!.setText(viewModel.model)
+        binding.productionDateValueTextView.text = viewModel.productionDate
 
-        if (addCarViewModel.color == "#ffffff") {
+        if (viewModel.color == "#ffffff") {
             binding.carColorImageView.setImageResource(R.drawable.ic_car2)
         } else {
             ImageViewCompat.setImageTintList(
                 binding.carColorImageView,
-                ColorStateList.valueOf(Color.parseColor(addCarViewModel.color))
+                ColorStateList.valueOf(Color.parseColor(viewModel.color))
             )
         }
 
-        binding.ownerValueTextView.text = addCarViewModel.ownerName
-        binding.latitudeValueTextView.text = addCarViewModel.latitude
-        binding.longitudeValueTextView.text = addCarViewModel.longitude
+        binding.ownerValueTextView.text = viewModel.ownerName
+        binding.latitudeValueTextView.text = viewModel.latitude
+        binding.longitudeValueTextView.text = viewModel.longitude
     }
 
     private fun initButtons() {
@@ -86,33 +82,32 @@ class AddNewCarFragment : Fragment() {
     }
 
     private fun initInputData() {
-        binding.registrationNumberTextInput.editText!!.doOnTextChanged { text, start, before, count ->
+        binding.registrationNumberTextInput.editText!!.doOnTextChanged { text, _, _, _ ->
             if (text!!.isEmpty()) {
                 binding.registrationNumberTextInput.error = resources.getString(R.string.empty_field_error)
             } else {
                 binding.registrationNumberTextInput.error = null
             }
 
-            addCarViewModel.registrationNumber = text.toString()
+            viewModel.registrationNumber = text.toString()
         }
-        binding.brandTextInput.editText!!.doOnTextChanged { text, start, before, count ->
+        binding.brandTextInput.editText!!.doOnTextChanged { text, _, _, _ ->
             if (text!!.isEmpty()) {
                 binding.brandTextInput.error = resources.getString(R.string.empty_field_error)
             } else {
                 binding.brandTextInput.error = null
-                addCarViewModel
             }
 
-            addCarViewModel.brand = text.toString()
+            viewModel.brand = text.toString()
         }
-        binding.modelTextInput.editText!!.doOnTextChanged { text, start, before, count ->
+        binding.modelTextInput.editText!!.doOnTextChanged { text, _, _, _ ->
             if (text!!.isEmpty()) {
                 binding.modelTextInput.error = resources.getString(R.string.empty_field_error)
             } else {
                 binding.modelTextInput.error = null
             }
 
-            addCarViewModel.model = text.toString()
+            viewModel.model = text.toString()
         }
     }
 
@@ -126,7 +121,7 @@ class AddNewCarFragment : Fragment() {
         binding.productionDateCardView.setOnClickListener {
             val dialog = DatePickerDialog(requireActivity(), { _, mYear, mMonth, mDay ->
                 var dayValue = mDay.toString()
-                var monthValue = mMonth.toString()
+                var monthValue = (mMonth + 1).toString()
 
                 if (mDay < 10)
                     dayValue = "0$dayValue"
@@ -135,7 +130,7 @@ class AddNewCarFragment : Fragment() {
                     monthValue = "0$monthValue"
 
                 binding.productionDateValueTextView.text = "$dayValue/$monthValue/$mYear"
-                addCarViewModel.productionDate = "$dayValue/$monthValue/$mYear"
+                viewModel.productionDate = "$dayValue/$monthValue/$mYear"
             }, year, month, day)
 
             dialog.show()
@@ -148,7 +143,7 @@ class AddNewCarFragment : Fragment() {
 
     private fun initCarColorPicker() {
         binding.colorCardView.setOnClickListener {
-            val initialColor = Color.parseColor(addCarViewModel.color)
+            val initialColor = Color.parseColor(viewModel.color)
 
             val dialog = AmbilWarnaDialog(
                 requireActivity(),
@@ -177,7 +172,7 @@ class AddNewCarFragment : Fragment() {
                             )
                         }
 
-                        addCarViewModel.color = "#${Integer.toHexString(color).substring(2)}"
+                        viewModel.color = "#${Integer.toHexString(color).substring(2)}"
                     }
                 }
             )
@@ -203,14 +198,14 @@ class AddNewCarFragment : Fragment() {
             if (!ConnectionUtils.isNetworkAvailable(activity as AddNewCarActivity)) {
                 Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
                     .show()
-            } else if (addCarViewModel.latitude == "-" || addCarViewModel.longitude == "-") {
+            } else if (viewModel.latitude == "-" || viewModel.longitude == "-") {
                 findNavController().navigate(
                     R.id.action_addNewCarFragment_to_selectCarLocationFragment
                 )
             } else {
                 val bundle = Bundle().apply {
-                    putDouble("latitude", addCarViewModel.latitude.toDouble())
-                    putDouble("longitude", addCarViewModel.longitude.toDouble())
+                    putDouble("latitude", viewModel.latitude.toDouble())
+                    putDouble("longitude", viewModel.longitude.toDouble())
                 }
 
                 findNavController().navigate(
@@ -222,40 +217,72 @@ class AddNewCarFragment : Fragment() {
     }
 
     private fun saveCar(view: View) {
-        if (isDataCorrectToSave()) {
+        if (isDataCorrectToSave(view)) {
+            showProgressBar()
+            viewModel.savedCarResponse.postValue(null)
+            viewModel.saveNewCar()
+            viewModel.savedCarResponse.observe(viewLifecycleOwner, { response ->
+                hideProgressBar()
+                if (response != null) {
+                    val bundle = Bundle().apply {
+                        putBoolean("update_order", true)
+                    }
+                    val intent = Intent(requireActivity(), CarsActivity::class.java).apply {
+                        putExtras(bundle)
+                    }
 
+                    (activity as AddNewCarActivity).finishAffinity()
+                    startActivity(intent)
+                } else {
+                    Snackbar.make(view, resources.getString(R.string.saving_error), Snackbar.LENGTH_LONG)
+                        .show()
+                }
+            })
         } else {
             Snackbar.make(view, resources.getString(R.string.empty_data_saving_error), Snackbar.LENGTH_LONG)
                     .show()
         }
     }
 
-    private fun isDataCorrectToSave(): Boolean {
+    private fun isDataCorrectToSave(view: View): Boolean {
         var isDataCorrect = true
 
-        if (addCarViewModel.registrationNumber == "") {
+        if (viewModel.registrationNumber == "") {
             isDataCorrect = false
             binding.registrationNumberTextInput.error = resources.getString(R.string.empty_field_error)
         }
-        if (addCarViewModel.brand == "") {
+        if (viewModel.brand == "") {
             isDataCorrect = false
             binding.brandTextInput.error = resources.getString(R.string.empty_field_error)
         }
-        if (addCarViewModel.model == "") {
+        if (viewModel.model == "") {
             isDataCorrect = false
             binding.modelTextInput.error = resources.getString(R.string.empty_field_error)
         }
-        if (addCarViewModel.productionDate == "__ / __ / ____") {
+        if (viewModel.productionDate == "__ / __ / ____") {
             isDataCorrect = false
         }
-        if (addCarViewModel.ownerName == "-") {
+        if (viewModel.ownerName == "-") {
             isDataCorrect = false
         }
-        if(addCarViewModel.latitude == "-" || addCarViewModel.longitude == "-") {
+        if(viewModel.latitude == "-" || viewModel.longitude == "-") {
+            isDataCorrect = false
+        }
+        if (!ConnectionUtils.isNetworkAvailable(activity as AddNewCarActivity)) {
+            Snackbar.make(view, resources.getString(R.string.check_internet_connection), Snackbar.LENGTH_LONG)
+                    .show()
             isDataCorrect = false
         }
 
         return isDataCorrect
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.INVISIBLE
     }
 
 }

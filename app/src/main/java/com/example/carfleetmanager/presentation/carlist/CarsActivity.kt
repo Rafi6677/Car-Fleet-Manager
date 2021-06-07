@@ -9,6 +9,7 @@ import com.example.carfleetmanager.R
 import com.example.carfleetmanager.databinding.ActivityCarsBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
 import com.example.carfleetmanager.presentation.addnewcar.AddNewCarActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,14 +17,23 @@ import dagger.hilt.android.AndroidEntryPoint
 class CarsActivity : AppCompatActivity() {
 
     val viewModel by viewModels<CarFleetViewModel>()
+    var needToBeUpdated = false
     private lateinit var binding: ActivityCarsBinding
     private lateinit var viewPagerAdapter: CarListViewPagerAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCarsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            needToBeUpdated = bundle.getBoolean("update_order")
+            Snackbar.make(binding.root, resources.getString(R.string.save_successfully), Snackbar.LENGTH_LONG)
+                .show()
+        }
 
         initViewPager()
         initButtons()

@@ -10,7 +10,6 @@ import com.example.carfleetmanager.R
 import com.example.carfleetmanager.data.model.Owner
 import com.example.carfleetmanager.databinding.FragmentSelectOwnerBinding
 import com.example.carfleetmanager.presentation.CarFleetViewModel
-import com.example.carfleetmanager.presentation.carlist.CarsActivity
 import com.example.carfleetmanager.presentation.util.ConnectionUtils
 import com.google.android.material.snackbar.Snackbar
 
@@ -27,7 +26,7 @@ class SelectOwnerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSelectOwnerBinding.bind(view)
-        viewModel = (activity as AddNewCarActivity).carFleetViewModel
+        viewModel = (activity as AddNewCarActivity).viewModel
         ownersAdapter = OwnersAdapter()
         ownersAdapter.setOnItemClickListener { owner ->
             onItemClickListener(owner)
@@ -66,10 +65,8 @@ class SelectOwnerFragment : Fragment() {
     }
 
     private fun onItemClickListener(owner: Owner) {
-        (activity as AddNewCarActivity)
-                .addCarViewModel.ownerId = owner.id
-        (activity as AddNewCarActivity)
-                .addCarViewModel.ownerName = "${owner.firstName} ${owner.lastName}"
+        viewModel.ownerId = owner.id
+        viewModel.ownerName = "${owner.firstName} ${owner.lastName}"
 
         requireActivity().onBackPressed()
     }
@@ -94,7 +91,7 @@ class SelectOwnerFragment : Fragment() {
     }
 
     private fun updateData(view: View) {
-        if (!ConnectionUtils.isNetworkAvailable(activity as CarsActivity)) {
+        if (!ConnectionUtils.isNetworkAvailable(activity as AddNewCarActivity)) {
             Snackbar.make(view, resources.getString(R.string.no_owner_data_found), Snackbar.LENGTH_LONG)
                     .show()
         } else {

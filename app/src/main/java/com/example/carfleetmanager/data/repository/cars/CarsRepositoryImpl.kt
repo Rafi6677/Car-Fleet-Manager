@@ -3,6 +3,8 @@ package com.example.carfleetmanager.data.repository.cars
 import android.app.Application
 import android.util.Log
 import com.example.carfleetmanager.data.model.Car
+import com.example.carfleetmanager.data.model.SendCar
+import com.example.carfleetmanager.data.model.SendCarResponse
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsCacheDataSource
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsLocalDataSource
 import com.example.carfleetmanager.data.repository.cars.datasource.CarsRemoteDataSource
@@ -29,10 +31,6 @@ class CarsRepositoryImpl(
         carsCacheDataSource.saveCarsToCache(newListOfCars)
 
         return newListOfCars
-    }
-
-    override suspend fun saveCar(car: Car) {
-        carsRemoteDataSource.saveCar(car)
     }
 
     private suspend fun getCarsFromAPI(): List<Car> {
@@ -90,6 +88,21 @@ class CarsRepositoryImpl(
         }
 
         return carList
+    }
+
+    override suspend fun saveCar(car: SendCar): SendCarResponse? {
+        try {
+            val response = carsRemoteDataSource.saveCar(car)
+            val body = response.body()
+
+            if (body != null) {
+                return body
+            }
+        } catch (e: Exception) {
+            Log.i("Cars_API_Tag", e.message.toString())
+        }
+
+        return null
     }
 
 }

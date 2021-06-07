@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/brand"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_16ssp"
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/registration_plate_imageView" />
@@ -70,7 +70,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/brand_example"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/brand_info_textView"
                 app:layout_constraintEnd_toStartOf="@+id/color_imageView"
@@ -85,7 +85,7 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:text="@string/model"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_16ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/brand_info_textView" />
 
@@ -96,7 +96,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/model_example"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/model_info_textView"
                 app:layout_constraintEnd_toStartOf="@+id/color_imageView"
