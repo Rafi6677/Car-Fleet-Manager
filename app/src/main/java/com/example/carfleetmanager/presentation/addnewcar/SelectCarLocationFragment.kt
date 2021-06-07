@@ -155,7 +155,11 @@ class SelectCarLocationFragment : Fragment(), OnMapReadyCallback {
                 viewModel.longitude = latLng.longitude.toString()
                 requireActivity().onBackPressed()
             }
-            .setNegativeButton(resources.getString(R.string.cancel)) { _, _ -> }
+            .setNegativeButton(resources.getString(R.string.cancel)) { _, _ ->
+                if (viewModel.latitude == "-" && viewModel.longitude == "-") {
+                    map.clear()
+                }
+            }
             .create()
 
         dialog.setOnShowListener {
